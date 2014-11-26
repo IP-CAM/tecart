@@ -122,7 +122,7 @@ function display(view) {
 				html = '<div class="image">' + image + '</div>';
 			}
 			
-			html += '<div class="left">';
+			html += '<div class="leftbox">';
 					
 			html += '  <div class="name">' + $(element).find('.name').html() + '</div>';
 			html += '  <div class="description">' + $(element).find('.description').html() + '</div>';
