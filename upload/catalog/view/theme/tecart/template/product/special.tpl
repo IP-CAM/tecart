@@ -60,6 +60,42 @@
                   <?php } ?>
                   <?php } ?>
 	  </div>
+	  
+	  <?php if ($product['benefits']) { ?>
+					<div class="benefit-text"><?php echo $text_benefits; ?></div>
+					<div class="benefits">
+					<ul class="benefit">
+					<?php foreach ($product['benefits'] as $benefit) { ?>	
+						<?php if ($benefit['type'] == 1) { ?>
+							<li>
+								<?php if (!$benefit['link']) { ?>
+								   <span class="thumb"><img src="<?php echo $benefit['thumb']; ?>" alt="<?php echo $benefit['name']; ?>" /></span>
+								<?php } else { ?> 
+								   <a href="<?php echo $benefit['link']; ?>" target="_blank" title="<?php echo $benefit['name']; ?>"><span class="thumb"><img src="<?php echo $benefit['thumb']; ?>" alt="<?php echo $benefit['name']; ?>" /></span></a>
+								<?php } ?>
+								<?php if ($benefit['description']) { ?>
+								<div class="benefit_description"><?php echo $benefit['description']; ?></div>
+								<?php } ?>
+							</li>
+						<?php } ?> 
+					<?php } ?>
+					</ul>
+					</div>
+					<div class="present">
+						<?php foreach ($product['benefits'] as $benefit) { ?>	
+							<?php if ($benefit['type'] == 0) { ?>
+								<div>
+									<?php if (!$benefit['link']) { ?>
+										<span class="thumb"><img src="<?php echo $benefit['thumb']; ?>" alt="<?php echo $benefit['name']; ?>" /></span>
+									<?php } else { ?> 
+										<a href="<?php echo $benefit['link']; ?>" target="_blank" title="<?php echo $benefit['name']; ?>"><span class="thumb"><img src="<?php echo $benefit['thumb']; ?>" alt="<?php echo $benefit['name']; ?>" /></span></a>
+									<?php } ?>
+								</div>
+							<?php } ?> 
+						<?php } ?>
+					</div>
+				<?php } ?>
+	  
       <div class="cart">
         <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
       </div>
@@ -78,41 +114,57 @@ function display(view) {
 	if (view == 'list') {
 		$('.product-grid').attr('class', 'product-list');
 		
-		/*$('.product-list > div').each(function(index, element) {
-			html  = '<div class="right">';
-			html += '  <div class="cart">' + $(element).find('.cart').html() + '</div>';
-			html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';
-			html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';
-			html += '</div>';			
-			
-			html += '<div class="left">';
+		$('.product-list > div').each(function(index, element) {
 			
 			var image = $(element).find('.image').html();
 			
 			if (image != null) { 
-				html += '<div class="image">' + image + '</div>';
+				html = '<div class="image">' + image + '</div>';
 			}
+			
+			html += '<div class="left">';
+					
+			html += '  <div class="name">' + $(element).find('.name').html() + '</div>';
+			html += '  <div class="description">' + $(element).find('.description').html() + '</div>';
 			
 			var price = $(element).find('.price').html();
 			
 			if (price != null) {
 				html += '<div class="price">' + price  + '</div>';
 			}
-					
-			html += '  <div class="name">' + $(element).find('.name').html() + '</div>';
-			html += '  <div class="description">' + $(element).find('.description').html() + '</div>';
 			
 			var rating = $(element).find('.rating').html();
 			
 			if (rating != null) {
 				html += '<div class="rating">' + rating + '</div>';
 			}
+			
+			//benefits
+			var benefit = $(element).find('.benefit').html();
+			
+			if (benefit != null) {
+				html += '<div class="benefit-text"><?php echo $text_benefits; ?></div>';
+				html += '  <div class="benefit">' + $(element).find('.benefit').html() + '</div>';
+			}
+			//benefits
+
+			//benefits present
+			var present = $(element).find('.present').html();
+			
+			if (present != null) {
+				html += '  <div class="present">' + $(element).find('.present').html() + '</div>';
+			}
+			//benefits present
+			
+			html += '  <div class="cart">' + $(element).find('.cart').html() + '</div>';
+			html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';
+			html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';
 				
 			html += '</div>';
 
 						
 			$(element).html(html);
-		});*/
+		});
 		
 		$('.display').html('<b><?php echo $text_display; ?></b> <span class="show-list"><?php echo $text_list; ?></span> <a class="show-grid" onclick="display(\'grid\');"><?php echo $text_grid; ?></a>');
 		
@@ -143,6 +195,22 @@ function display(view) {
 			if (rating != null) {
 				html += '<div class="rating">' + rating + '</div>';
 			}
+			
+			//benefits
+			var benefit = $(element).find('.benefit').html();
+			
+			if (benefit != null) {
+				html += '<div class="benefit-text"><?php echo $text_benefits; ?></div>';
+				html += '  <div class="benefit">' + $(element).find('.benefit').html() + '</div>';
+			}
+			//benefits
+			//benefits present
+			var present = $(element).find('.present').html();
+			
+			if (present != null) {
+				html += '  <div class="present">' + $(element).find('.present').html() + '</div>';
+			}
+			//benefits present
 						
 			html += '<div class="cart">' + $(element).find('.cart').html() + '</div>';
 			html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';
